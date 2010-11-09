@@ -22,7 +22,7 @@ long long InvMod(long long a, long long mod) {
 const int MAX_P = 100000;
 int modFact[MAX_P];
 void calcModFact(int p) {
-  assert(p < MAX_P);
+  assert(p <= MAX_P);
   modFact[0] = 1;
   for (int i = 1; i < p; i++) {
     modFact[i] = (modFact[i - 1] * i) % p;
@@ -30,7 +30,7 @@ void calcModFact(int p) {
 }
 
 int ModFact(int n, int p, int &e) {
-  assert(p < MAX_P);
+  assert(p <= MAX_P);
   e = 0;
   if (n == 0) { return 1; }
   int res = ModFact(n / p, p, e);
