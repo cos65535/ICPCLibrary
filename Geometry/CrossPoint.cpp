@@ -15,7 +15,7 @@ vector<Point> crosspointLC(const Line &l, const Circle &c) {
   Point vect = (l[1] - l[0]);
   vect /= abs(vect);
   ret.push_back(center - vect * t);
-  if (l > EPS) {
+  if (t > EPS) {
     ret.push_back(center + vect * t);
   }
   return ret;
