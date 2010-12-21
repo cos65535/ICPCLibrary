@@ -30,6 +30,27 @@ pair<Weight, Weight> minCostFlow(const Graph &g, int s, int t) {
   vector<int> parent(n);
   vector<Weight> prev_dist(n, 0);
   vector<Weight> now_dist(n);
+
+  // calc potential
+  for (int iter = 0; iter < n; iter++) {
+    bool end = true;
+    for (int from = 0; from < n; from++) {
+      for (int i = 0; i < (int)g[from].size(); i++) {
+        if (g[from][i].capacity <= 0) { continue; }
+        int to = g[from][i].dest;
+        Weight ncost = prev_dist[from] + g[from][i].cost;
+        if (ncost < prev_dist[to]) {
+          end = false;
+          prev_dist[to] = ncost;
+        }
+      }
+    }
+    if (end) { break; }
+    if (iter == n - 1) {
+      assert(false); // exist negative cycle
+    }
+  }
+
   while (true) {
     fill(parent.begin(), parent.end(), -1);
     fill(now_dist.begin(), now_dist.end(), 2000000000LL);
