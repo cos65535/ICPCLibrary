@@ -16,7 +16,6 @@
 using namespace std;
 typedef unsigned int uint;
 typedef long long ll;
-typedef unsigned long long ull;
 static const double EPS = 1e-9;
 static const double PI = acos(-1.0);
 
@@ -26,11 +25,12 @@ static const double PI = acos(-1.0);
 #define FORIT(it, c) for (__typeof((c).begin())it = (c).begin(); it != (c).end(); it++)
 #define MEMSET(v, h) memset((v), h, sizeof(v))
 
-using namespace std;
-
 class $CLASSNAME$ {
   public:
     $RC$ $METHODNAME$($METHODPARMS$) {
+      static int test = 0;
+      test++;
+      //if (test == 1) { return 0; }
     }
 
 
