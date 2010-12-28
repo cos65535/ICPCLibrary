@@ -30,7 +30,7 @@ class $CLASSNAME$ {
     $RC$ $METHODNAME$($METHODPARMS$) {
       static int test = 0;
       test++;
-      //if (test == 1) { return 0; }
+      //if (test != 1) { return 0; }
 
     }
 
