@@ -48,3 +48,21 @@ int ModCombi(int n, int k, int p) {
   if (e1 > e2 + e3) { return 0; }
   return a1 * InvMod(a2 * a3 % p, p) % p;
 }
+
+// need extgcd
+ll ChineseRemaiderTherom(const vector<ll> &anss, const vector<ll> &mods) {
+  assert(anss.size() == mods.size());
+  ll all = 1;
+  for (int i = 0; i < (int)mods.size(); i++) {
+    all *= mods[i];
+  }
+  ll ret = 0;
+  for (int i = 0; i < (int)anss.size(); i++) {
+    ll x, y;
+    extgcd(mods[i], all / mods[i], x, y); 
+    y = (y + all) % all;
+    ret = (ret + (anss[i] + all) % all * y * (all / mods[i]) % all) % all;
+    assert(ret >= 0); 
+  }
+  return ret;
+}
