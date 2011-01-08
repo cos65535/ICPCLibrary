@@ -1,7 +1,14 @@
 Point crosspointSS(const Line &l, const Line &m) {
   double A = cross(l[1] - l[0], m[1] - m[0]);
   double B = cross(l[1] - l[0], l[1] - m[0]);
-  if (abs(A) < EPS && abs(B) < EPS) { return m[0]; }
+  if (abs(A) < EPS && abs(B) < EPS) {
+    assert(false);
+    if (intersectSP(l, m[0])) { return m[0]; }
+    if (intersectSP(l, m[1])) { return m[1]; }
+    if (intersectSP(m, l[0])) { return l[0]; }
+    if (intersectSP(m, l[1])) { return l[1]; }
+    return m[0];
+  }
   if (abs(A) < EPS) { assert(false); }
   return m[0] + B / A * (m[1] - m[0]);
 }
