@@ -181,17 +181,10 @@ template <class T>
 void PrintVector(const vector<T> &item) {
   const int n = item.size();
   for (int i = 0; i < n; i++) {
-    if (i != 0) { putchar(' '); }
+    if (i != 0) { putchar(','); }
     cout << item[i];
   }
-}
-
-void PrintVectorString(const vector<string> &item) {
-  const int n = item.size();
-  for (int i = 0; i < n; i++) {
-    printf("%s", item[i].c_str());
-    if (i != n - 1) { putchar(','); }
-  }
+  puts("");
 }
 
 #define TEST ___test.$METHODNAME$
@@ -202,4 +195,3 @@ int main() {
 }
 
 // END CUT HERE
-
