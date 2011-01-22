@@ -14,7 +14,6 @@
 #include <set>
 
 using namespace std;
-typedef unsigned int uint;
 typedef long long ll;
 static const double EPS = 1e-9;
 static const double PI = acos(-1.0);

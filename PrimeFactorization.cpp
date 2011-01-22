@@ -7,7 +7,7 @@ vector<pair<int, int> > PrimeFactorization(int n) {
     while (n % prime[i] == 0) {
       n /= prime[i];
       size++;
-    }   
+    }
     if (size != 0) { ret.push_back(make_pair(prime[i], size)); }
   }
   if (n != 1) { ret.push_back(make_pair(n, 1)); }
