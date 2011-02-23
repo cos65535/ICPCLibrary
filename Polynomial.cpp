@@ -12,9 +12,11 @@ struct Polynomial {
     coefficient.resize(s);
   }
   T operator[](int index) const {
+    assert(index >= 0 && index < coefficient.size());
     return coefficient[index];
   }
   T &operator[](int index) {
+    assert(index >= 0 && index < coefficient.size());
     return coefficient[index];
   }
   Polynomial operator+(const Polynomial &rhs) const {
@@ -84,7 +86,7 @@ struct Polynomial {
   Polynomial operator/=(const T &rhs) {
     return *this = *this / rhs;
   }
-  Polynomial operator-() {
+  Polynomial operator-() const {
     return *this * Polynomial(1, -1);
   }
   pair<Polynomial, Polynomial> divmod(const Polynomial &rhs) const {
@@ -137,6 +139,11 @@ struct Polynomial {
     cout << endl;
   }
 };
+ostream &operator<<(ostream &os, const Polynomial<T> &rhs) {
+  for (int i = 0; i < rhs.size(); i++) { os << coefficient[i] << " "; }
+  os << endl;
+  return os;
+}
 
 template <class T>
 Polynomial<T> PolynomialGCD(Polynomial<T> a, Polynomial<T> b) {

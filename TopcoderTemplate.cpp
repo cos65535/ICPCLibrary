@@ -29,7 +29,7 @@ class $CLASSNAME$ {
     $RC$ $METHODNAME$($METHODPARMS$) {
       static int test = 0;
       test++;
-      //if (test == 1) { return 0; }
+      //if (test != 1) { return 0; }
 
     }
 
@@ -152,6 +152,30 @@ vector<string> RandomStringVector(int lowerSize1, int upperSize1, int lowerSize2
   return ret;
 }
 
+vector<int> StringToVectorInt(const string &str) {
+  const int n = str.size();
+  vector<int> ret;
+  string temp;
+  for (int i = 0; i < n; i++) {
+    if (str[i] != ',') { temp += str[i]; }
+    else { ret.push_back(atoi(temp.c_str())); temp = ""; }
+  }
+  ret.push_back(atoi(temp.c_str()));
+  return ret;
+}
+
+vector<string> StringToVectorString(const string &str) {
+  const int n = str.size();
+  vector<string> ret;
+  string temp;
+  for (int i = 0; i < n; i++) {
+    if (str[i] != ',') { temp += str[i]; }
+    else { ret.push_back(temp); temp = ""; }
+  }
+  ret.push_back(temp);
+  return ret;
+}
+
 template <class T>
 void PrintVector(const vector<T> &item) {
   const int n = item.size();
@@ -170,4 +194,3 @@ int main() {
 }
 
 // END CUT HERE
-
