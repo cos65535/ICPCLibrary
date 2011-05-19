@@ -104,3 +104,8 @@ pair<Weight, Weight> MinCostFlow(const Graph &g, int e, int s, int t) {
   }
   return ret;
 }
+
+void AddEdge(Graph &g, int &e, int from, int to, Weight capacity, Weight cost) {
+  g[from].push_back(Edge(e++, from, to, capacity, cost));
+  g[to].push_back(Edge(e++, to, from, 0, -cost));
+}

@@ -16,7 +16,7 @@ typedef vector<Edges> Graph;
 typedef vector<Weight> Array;
 typedef vector<Array> Matrix;
 
-pair<Weight, Weight> minCostFlow(const Graph &g, int s, int t) {
+pair<Weight, Weight> MinCostFlow(const Graph &g, int s, int t) {
   const int n = g.size();
   Matrix capacity(n, Array(n, 0));
   Matrix cost(n, Array(n, 0));
@@ -96,4 +96,9 @@ pair<Weight, Weight> minCostFlow(const Graph &g, int s, int t) {
     }
   }
   return ret;
+}
+
+void AddEdge(Graph &g, int from, int to, Weight capacity, Weight cost) {
+  g[from].push_back(Edge(from, to, capacity, cost));
+  g[to].push_back(Edge(to, from, 0, -cost));
 }

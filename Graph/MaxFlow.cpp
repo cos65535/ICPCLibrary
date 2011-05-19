@@ -47,3 +47,7 @@ int MaxFlow(const Graph &g, int s, int t) {
   return ret;
 }
 
+void AddEdge(Graph &g, int from, int to, Weight capacity) {
+  g[from].push_back(Edge(from, to, capacity));
+  g[to].push_back(Edge(to, from, 0));
+}

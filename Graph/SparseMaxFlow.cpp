@@ -81,3 +81,8 @@ Weight MaxFlow(const Graph &g, int e, int s, int t) {
   }
   return ans;
 }
+
+void AddEdge(Graph &g, int &e, int from, int to, Weight capacity) {
+  g[from].push_back(Edge(e++, from, to, capacity));
+  g[to].push_back(Edge(e++, to, from, 0));
+}
