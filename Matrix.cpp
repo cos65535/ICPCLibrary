@@ -186,8 +186,8 @@ struct Matrix {
     assert(width() == rhs.height());
     Matrix ret(height(), rhs.width());
     for (int i = 0; i < height(); i++) {
-      for (int j = 0; j < rhs.width(); j++) {
-        for (int k = 0; k < width(); k++) {
+      for (int k = 0; k < width(); k++) {
+        for (int j = 0; j < rhs.width(); j++) {
           T prev = ret[i][j];
           T mul = vects[i][k] * rhs.vects[k][j];
           assert("overflow!" && (rhs.vects[k][j] == 0 || mul / rhs.vects[k][j] == vects[i][k]));
@@ -288,8 +288,8 @@ ostream &operator<<(ostream &os, const Matrix<T> &rhs) {
 Matrix<ll> modmul(const Matrix<ll> &lhs, const Matrix<ll> &rhs, const ll mod) {
   Matrix<ll> ret(lhs.height(), rhs.width());
   for (int i = 0; i < lhs.height(); i++) {
-    for (int j = 0; j < rhs.width(); j++) {
-      for (int k = 0; k < lhs.width(); k++) {
+    for (int k = 0; k < lhs.width(); k++) {
+      for (int j = 0; j < rhs.width(); j++) {
         ll prev = ret[i][j];
         ll mul = lhs.vects[i][k] * rhs.vects[k][j];
         assert("overflow!" && (rhs.vects[k][j] == 0 || mul / rhs.vects[k][j] == lhs.vects[i][k]));
