@@ -56,8 +56,8 @@ Matrix mul(const Matrix &matrix1, const Matrix &matrix2) {
   assert((int)matrix2.size() == in);
   Matrix ret(h, Array(w, 0));
   for (int y = 0; y < h; y++) {
-    for (int x = 0; x < w; x++) {
-      for (int i = 0; i < in; i++) {
+    for (int i = 0; i < in; i++) {
+      for (int x = 0; x < w; x++) {
         ret[y][x] += matrix1[y][i] * matrix2[i][x];
       }
     }
