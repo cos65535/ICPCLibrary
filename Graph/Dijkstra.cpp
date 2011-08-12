@@ -26,4 +26,3 @@ Weight Dijkstra(const Graph &g, int s, int t) {
   }
   return ans;
 }
-

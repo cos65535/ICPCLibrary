@@ -7,7 +7,7 @@ inline unsigned nextSet(unsigned x)
   return ripple | ones;
 }
 
-inline unsigned next_subset(unsigned S, unsigned U)
+inline unsigned nextSubset(unsigned S, unsigned U)
 {
   return (S - U) & U;
 }
