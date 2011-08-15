@@ -2,35 +2,35 @@ typedef double Weight;
 typedef vector<Weight> Array;
 typedef vector<Array> Matrix;
 
-Weight dot(const Array &array1, const Array &array2) {
-  const int h = array1.size();
-  assert((int)array2.size() == h);
+Weight dot(const Array &lhs, const Array &rhs) {
+  const int h = lhs.size();
+  assert((int)rhs.size() == h);
   Weight ret = 0;
   for (int y = 0; y < h; y++) {
-    ret += array1[y] * array2[y];
+    ret += lhs[y] * rhs[y];
   }
   return ret;
 }
 
-Array plus(const Array &array1, const Array &array2) {
-  const int h = array1.size();
-  assert((int)array2.size() == h);
+Array plus(const Array &lhs, const Array &rhs) {
+  const int h = lhs.size();
+  assert((int)rhs.size() == h);
   Array ret(h, 0);
   for (int y = 0; y < h; y++) {
-    ret[y] = array1[y] + array2[y];
+    ret[y] = lhs[y] + rhs[y];
   }
   return ret;
 }
 
-Matrix plus(const Matrix &matrix1, const Matrix &matrix2) {
-  const int h = matrix1.size();
-  const int w = matrix1[0].size();
-  assert((int)matrix2.size() == h);
-  assert((int)matrix2[0].size() == w);
+Matrix plus(const Matrix &lhs, const Matrix &rhs) {
+  const int h = lhs.size();
+  const int w = lhs[0].size();
+  assert((int)rhs.size() == h);
+  assert((int)rhs[0].size() == w);
   Matrix ret(h, Array(w, 0));
   for (int y = 0; y < h; y++) {
     for (int x = 0; x < w; x++) {
-      ret[y][x] = matrix1[y][x] + matrix2[y][x];
+      ret[y][x] = lhs[y][x] + rhs[y][x];
     }
   }
   return ret;
@@ -49,16 +49,16 @@ Array mul(const Matrix &matrix, const Array &vect) {
   return ret;
 }
 
-Matrix mul(const Matrix &matrix1, const Matrix &matrix2) {
-  const int in = matrix1[0].size();
-  const int h = matrix1.size();
-  const int w = matrix2[0].size();
-  assert((int)matrix2.size() == in);
+Matrix mul(const Matrix &lhs, const Matrix &rhs) {
+  const int in = lhs[0].size();
+  const int h = lhs.size();
+  const int w = rhs[0].size();
+  assert((int)rhs.size() == in);
   Matrix ret(h, Array(w, 0));
   for (int y = 0; y < h; y++) {
     for (int i = 0; i < in; i++) {
       for (int x = 0; x < w; x++) {
-        ret[y][x] += matrix1[y][i] * matrix2[i][x];
+        ret[y][x] += lhs[y][i] * rhs[i][x];
       }
     }
   }
