@@ -36,6 +36,11 @@ struct Long {
 
   Long &Normalize() {
     int s = 1;
+    while (digits[size() - 1] <= -BASE) {
+      ll v = digits[size() - 1] / BASE;
+      digits.push_back(v);
+      digits[size() - 2] -= v * BASE;
+    }     
     for (int i = 0; i < size(); i++) {
       if (i == size() - 1 && digits[i] < 0) {
         goto minus;

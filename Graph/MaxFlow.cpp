@@ -10,10 +10,10 @@ int MaxFlow(const Graph &g, int s, int t) {
   vector<int> parent(n);
   while (true) {
     fill(parent.begin(), parent.end(), -1);
-    priority_queue<Edge> que;
+    queue<Edge> que;
     que.push(Edge(s, s, 0));
     while (!que.empty()) {
-      Edge node = que.top();
+      Edge node = que.front();
       que.pop();
       if (parent[node.dest] != -1) { continue; }
       parent[node.dest] = node.src;
