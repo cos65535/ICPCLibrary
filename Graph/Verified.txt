@@ -1,2 +1,3 @@
 DirectedMinimumSpanningTree.cpp
-  AOJ 2309
+  AOJ 2309 (Vector Compression)
+  UVa 11183 (Teen Girl Squad)
