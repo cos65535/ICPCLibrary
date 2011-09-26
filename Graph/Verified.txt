@@ -1,3 +1,6 @@
 DirectedMinimumSpanningTree.cpp
   AOJ 2309 (Vector Compression)
   UVa 11183 (Teen Girl Squad)
+
+LCA.cpp
+  UVa 10938 (Flea circus)

@@ -1,5 +1,5 @@
 struct FenwickTree {
-  const int SIZE = 10000;
+  static const int SIZE = 10000;
   int tree[SIZE + 10];
   FenwickTree() { memset(tree, 0, sizeof(tree)); }
   void add(int index, int value) {
