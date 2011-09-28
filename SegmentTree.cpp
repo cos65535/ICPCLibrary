@@ -1,8 +1,3 @@
-#include <assert.h>
-
-static const int MAX_DEPTH = 17;
-static const int SIZE = 1 << (MAX_DEPTH + 1);  // 2^18 = 262144
-
 struct Node {
   int num;
   Node() {;}
@@ -14,6 +9,9 @@ inline Node merge(Node left, Node right) {
 }
 
 struct SegmentTree {
+  static const int MAX_DEPTH = 17;
+  static const int SIZE = 1 << (MAX_DEPTH + 1);  // 2^18 = 262144
+
   Node data[SIZE];
   void change(int index, Node value) {
     int target = (1 << MAX_DEPTH) + index;

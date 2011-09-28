@@ -36,3 +36,14 @@ vector<Point> crosspointSC(const Line &s, const Circle &c) {
   }
   return ret;
 }
+
+// no checked
+vector<Point> crosspointCC(const Circle &c1, const Circle &c2) {
+  vector<Point> ret;
+  double d = abs(c1.p - c2.p);
+  if (max(c1.r, c2.r) - min(c1.r, c2.r) - d> -EPS) { return ret; }
+  double x = (d * d + c1.r * c1.r - c2.r * c2.r) / (2 * d);
+  Point start = c1.p + (c2.p - c1.p) / d * x;
+  Point vect = (c1.p - c2.p) * Point(0.0, 1.0);
+  return crosspointLC(Line(start, start + vect), c1);
+}
