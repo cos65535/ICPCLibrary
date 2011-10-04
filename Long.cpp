@@ -234,7 +234,7 @@ vector<Complex> FFT(double theta, const vector<Complex> &a) {
 }
 Long FastMul(const Long &lhs, const Long &rhs) {
   int n = 1;
-  while (n < max(lhs.size(), rhs.size()) * 2) { n <<= 1; }
+  while (n < (int)max(lhs.size(), rhs.size()) * 2) { n <<= 1; }
   vector<Complex> temp1(n);
   vector<Complex> temp2(n);
   for (int i = 0; i < n; i++) {
