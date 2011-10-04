@@ -78,13 +78,15 @@ struct AhoCorasick {
     //return pma[index].next[c];
   }
 
+  // return first match indices
   vector<int> Match(const char *t) {
+    assert(build);
     int index = 0;
-    vector<int> ret(lens.size());
+    vector<int> ret(lens.size(), -1);
     int n = strlen(t);
     for (int i = 0; i < n; i++) {
-      int c = *t;
-      OneMove(index, c);
+      int c = t[i];
+      index = OneMove(index, c);
       for (vector<int>::const_iterator it = pma[index].accept.begin(); it != pma[index].accept.end(); it++) {
         if (ret[*it] != -1) { continue; }
         ret[*it] = i - lens[*it] + 1;

@@ -1,5 +1,5 @@
 CircleCircleArea.cpp
-  GoogleCodeJam 2010 Round2 D-small (Grazing Google Goats)
+  GCJ 2010 Round2 D-small (Grazing Google Goats)
   UVa Live Archive 4623 (Everybody may get lost in space)
 
 CircleTangent.cpp
