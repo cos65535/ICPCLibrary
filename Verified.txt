@@ -11,3 +11,6 @@ SuffixArray.cpp
   UVa Live Archive 2680 (Crazy Search)
   UVa Live Archive 3901 (Editor)
   UVa 10679 (I Love Strings!!)
+
+Convolution.cpp
+  AOJ 2268 (Randomized Self-Balancing Binary Search Tree)
