@@ -5,3 +5,4 @@ DirectedMinimumSpanningTree.cpp
 LCA.cpp
   UVa 10938 (Flea circus)
   SPOJ 913 (Query on a tree II)
+  AOJ 2270 (The L-th Number)
