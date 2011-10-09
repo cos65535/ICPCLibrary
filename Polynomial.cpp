@@ -12,11 +12,11 @@ struct Polynomial {
     coefficient.resize(s);
   }
   T operator[](int index) const {
-    assert(index >= 0 && index < coefficient.size());
+    assert(index >= 0 && index < size());
     return coefficient[index];
   }
   T &operator[](int index) {
-    assert(index >= 0 && index < coefficient.size());
+    assert(index >= 0 && index < size());
     return coefficient[index];
   }
   Polynomial operator+(const Polynomial &rhs) const {
@@ -139,8 +139,9 @@ struct Polynomial {
     cout << endl;
   }
 };
+template <class T>
 ostream &operator<<(ostream &os, const Polynomial<T> &rhs) {
-  for (int i = 0; i < rhs.size(); i++) { os << coefficient[i] << " "; }
+  for (int i = 0; i < rhs.size(); i++) { os << rhs.coefficient[i] << " "; }
   os << endl;
   return os;
 }
