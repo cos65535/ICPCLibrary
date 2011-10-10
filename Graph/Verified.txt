@@ -6,3 +6,7 @@ LCA.cpp
   UVa 10938 (Flea circus)
   SPOJ 913 (Query on a tree II)
   AOJ 2270 (The L-th Number)
+
+Bridge.cpp
+  Codeforces 118E (Bertown roads)
+  UVa 796 (Critical Links) 
