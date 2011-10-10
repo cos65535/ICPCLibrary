@@ -10,3 +10,7 @@ LCA.cpp
 Bridge.cpp
   Codeforces 118E (Bertown roads)
   UVa 796 (Critical Links) 
+
+Art.cpp
+  UVa 10199 (Tourist Guide)
+  UVa 10765 (Doves and bombs)
