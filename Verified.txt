@@ -14,3 +14,6 @@ SuffixArray.cpp
 
 Convolution.cpp
   AOJ 2268 (Randomized Self-Balancing Binary Search Tree)
+
+Long.cpp (very slow)
+  UVa 12316 (Sewing Buttons with Grandma)
