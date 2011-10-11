@@ -17,3 +17,6 @@ Convolution.cpp
 
 Long.cpp (very slow)
   UVa 12316 (Sewing Buttons with Grandma)
+
+GaussElimination.cpp
+  UVa Live Archive 4531 (Movie Promotion)
