@@ -16,3 +16,6 @@ ConvexHull.cpp
 
 ThreePointCircle.cpp
   UVa 190 (Circle Through Three Points)
+
+MaxPointCircle.cpp
+  PKU 1981 (Circle and Points)
