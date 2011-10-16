@@ -17,3 +17,6 @@ Art.cpp
 
 SparseMinCostFlow.cpp
   UVa Live Archive 4531 (Movie Promotion)
+
+Dijkstra.cpp
+  AOJ 2283 (Seishun 18 Kippu)
