@@ -1,0 +1,13 @@
+<html>
+<head><title>visualkun</title></head>
+<script>
+function line(x,y,a,b){c.b();c.moveTo(x,y);c.lineTo(a,b);c.s();}
+function circle(x,y,r){c.b();c.arc(x,y,r,0,7,0);c.s();}
+window.onload=function(){d=document;d.i=d.getElementById;
+ c=d.i('c').getContext('2d');c.b=c.beginPath;c.s=c.stroke;
+ d.i('s').src='data.js?';};
+</script>
+<body><canvas id="c" width="2000" height="2000"
+style="border:1px solid #000;"></canvas>
+<script id="s"></script></body> 
+</html>
