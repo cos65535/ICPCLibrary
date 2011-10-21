@@ -1,4 +1,4 @@
-// need Soc
+// need Scc
 Weight Arborescence(const Graph &g, int root) {
   const int n = g.size();
   Weight ret = 0;
