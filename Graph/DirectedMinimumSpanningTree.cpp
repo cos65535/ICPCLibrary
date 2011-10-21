@@ -6,6 +6,7 @@ Weight Arborescence(const Graph &g, int root) {
   vector<int> parent(n, -1);
   for (int from = 0; from < n; from++) {
     for (Edges::const_iterator it = g[from].begin(); it != g[from].end(); it++) {
+      if (it->dest == from) { continue; }
       if (it->weight < inCost[it->dest]) {
         parent[it->dest] = from;
         inCost[it->dest] = it->weight;
@@ -47,5 +48,5 @@ Weight Arborescence(const Graph &g, int root) {
       ng[mapto[from]].push_back(Edge(mapto[from], mapto[to], cost));
     }
   }
-  return min(1000000000LL, ret + Arborescence(ng, mapto[root]));
+  return min(1000000000LL, (ll)ret + Arborescence(ng, mapto[root]));
 }
