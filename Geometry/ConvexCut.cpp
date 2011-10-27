@@ -1,4 +1,4 @@
-Polygon convex_cut(const Polygon &P, const Line &l) {
+Polygon ConvexCut(const Polygon &P, const Line &l) {
   Polygon Q;
   for (int i = 0; i < (int)P.size(); i++) {
     Point A = CURR(P, i), B = NEXT(P, i);
@@ -9,5 +9,3 @@ Polygon convex_cut(const Polygon &P, const Line &l) {
   }
   return Q;
 }
-
-

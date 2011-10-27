@@ -1,4 +1,4 @@
-Polygon convex_hull(Polygon ps) {
+Polygon ConvexHull(Polygon ps) {
   int n = ps.size();
   int k = 0;
   sort(ps.begin(), ps.end());

@@ -1,5 +1,5 @@
 // O(n^2logn)
-int MaxPointCircle(const vector<Point> points, double r) {
+int MaxPointCircle(const vector<Point> &points, double r) {
   const int n = points.size();
   int ret = 1;
   for (int i = 0; i < n; i++) {

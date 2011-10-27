@@ -1,4 +1,4 @@
-// need Soc
+// need Scc
 Weight Arborescence(const Graph &g, int root) {
   const int n = g.size();
   Weight ret = 0;
@@ -20,7 +20,7 @@ Weight Arborescence(const Graph &g, int root) {
     ng[parent[i]].push_back(Edge(parent[i], i, 0));
     ret += inCost[i];
   }
-  vector<vector<int> > connect = Soc(ng);
+  vector<vector<int> > connect = Scc(ng);
   int m = connect.size();
   if (m == n) { return ret; }
   vector<int> mapto(n, -1);

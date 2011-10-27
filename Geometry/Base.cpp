@@ -1,10 +1,8 @@
 #include <complex>
-#include <vector>
 
 typedef complex<double> Point;
 typedef vector<Point> Polygon;
 
-//static const double EPS = 1e-8;
 static const double INF = 1e+10;
 
 #define CURR(P, i) (P[i])
