@@ -3,7 +3,7 @@ int MaxFlow(const Graph &g, int s, int t) {
   Matrix capacity(n, Array(n, 0));
   for (int i = 0; i < n; i++) {
     for (Edges::const_iterator it = g[i].begin(); it != g[i].end(); it++) {
-      capacity[it->src][it->dest] = it->weight;
+      capacity[it->src][it->dest] += it->weight;
     }
   }
   int ret = 0;
