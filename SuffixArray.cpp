@@ -3,7 +3,7 @@ struct SuffixArray {
     const int h, *g;
     SAComp(int h, int *g) : h(h), g(g) {;}
     bool operator() (int a, int b) {
-      return a == b ? false : g[a] != g[b] ?  g[a] < g[b] : g[a + h] < g[b + h];
+      return a == b ? false : g[a] != g[b] ? g[a] < g[b] : g[a + h] < g[b + h];
     }
   };
 
