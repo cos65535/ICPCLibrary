@@ -26,8 +26,8 @@ bool isPrime(long long n) {
     s++;
     d >>= 1;
   }
-  //long long test[4] = { 2, 7, 61, 1LL << 60 }; // is for n < 2^32
-  long long test[10] = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 1LL << 60 }; // is for n < 10^16 (at least)
+  long long test[4] = { 2, 7, 61, 1LL << 60 }; // is for n < 2^32
+  //long long test[10] = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 1LL << 60 }; // is for n < 10^16 (at least)
   for (int i = 0; test[i] < n; i++) {
     if (!(suspect(test[i], s, d, n))) { return false; }
   }
