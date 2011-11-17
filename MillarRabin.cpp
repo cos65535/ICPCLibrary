@@ -1,4 +1,4 @@
-long long powmod(long long base, int power, int mod) {
+long long powmod(long long base, long long power, long long mod) {
   long long ans = 1;
   while (power > 0) {
     if (power & 1) { ans = ans * base % mod; }
@@ -8,7 +8,7 @@ long long powmod(long long base, int power, int mod) {
   return ans;
 }
 
-bool suspect(int t, int s, int d, int n) {
+bool suspect(long long t, long long s, long long d, long long n) {
   long long x = powmod(t, d, n);
   if (x == 1) { return true; }
   while (s--) {
@@ -18,15 +18,16 @@ bool suspect(int t, int s, int d, int n) {
   return false;
 }
 
-bool isPrime(int n) {
+bool isPrime(long long n) {
   if (n <= 1 || (n > 2 && !(n & 1))) { return false; }
-  int d = n - 1;
-  int s = 0;
+  long long d = n - 1;
+  long long s = 0;
   while (!(d & 1)) {
     s++;
     d >>= 1;
   }
-  int test[4] = { 2, 7, 61, 0x7fffffff };
+  //long long test[4] = { 2, 7, 61, 1LL << 60 }; // is for n < 2^32
+  long long test[10] = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 1LL << 60 }; // is for n < 10^16 (at least)
   for (int i = 0; test[i] < n; i++) {
     if (!(suspect(test[i], s, d, n))) { return false; }
   }
