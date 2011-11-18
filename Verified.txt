@@ -20,3 +20,6 @@ Long.cpp (very slow)
 
 GaussElimination.cpp
   UVa Live Archive 4531 (Movie Promotion)
+
+MillarRabin.cpp
+  SRM524 div1 250 (Magic Diamonds)
