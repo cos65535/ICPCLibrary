@@ -12,7 +12,7 @@ struct AhoCorasick {
   bool build;
   vector<State> pma;
   vector<int> lens;
-  //vector<string. strs;
+  //vector<string> strs;
 
   AhoCorasick() {
     build = false;
