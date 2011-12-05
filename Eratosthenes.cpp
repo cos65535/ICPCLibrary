@@ -9,6 +9,7 @@ int Eratosthenes(int n) {
   for (int i = 2; i <= n; i++) {
     if (!bprime[i]) { continue; }
     prime[psize++] = i;
+    if ((long long)i * i > n) { continue; }
     for (int j = i * i; j <= n; j += i) {
       bprime[j] = false;
     }
