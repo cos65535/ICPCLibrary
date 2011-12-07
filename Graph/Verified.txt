@@ -10,6 +10,7 @@ LCA.cpp
 Bridge.cpp
   Codeforces 118E (Bertown roads)
   UVa 796 (Critical Links) 
+  AOJ 2338 (Intelligible Double Magic)
 
 Art.cpp
   UVa 10199 (Tourist Guide)

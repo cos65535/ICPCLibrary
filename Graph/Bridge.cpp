@@ -47,3 +47,35 @@ Edges Bridge(const Graph &g) {
   }
   return bridge;
 }
+
+int BridgeCompressDfs(const Graph &g, int from, int id, map<int, int> &mapto, set<Edge> &ban) {
+  mapto[from] = id;
+  int ret = 1;
+  for (Edges::const_iterator it = g[from].begin(); it != g[from].end(); it++) {
+    if (mapto.count(it->dest) || ban.count(*it)) { continue; }
+    ret += BridgeCompressDfs(g, it->dest, id, mapto, ban);
+  }
+  return ret;
+}
+
+Graph BridgeCompress(const Graph &g) {
+  const int n = g.size();
+  Edges bridge = Bridge(g);
+  set<Edge> ban;
+  for (Edges::const_iterator it = bridge.begin(); it != bridge.end(); it++) {
+    ban.insert(*it);
+    ban.insert(Edge(it->dest, it->src, it->weight));
+  }
+  int m = 0;
+  map<int, int> mapto;
+  REP(i, n) {
+    if (mapto.count(i)) { continue; }
+    int w = BridgeCompressDfs(g, i, m, mapto, ban);
+    m++;
+  }
+  Graph ret(m);
+  for (set<Edge>::iterator it = ban.begin(); it != ban.end(); it++) {
+    ret[mapto[it->src]].push_back(Edge(mapto[it->src], mapto[it->dest], it->weight));
+  }
+  return ret;
+}
