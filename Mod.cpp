@@ -50,7 +50,7 @@ int ModCombi(int n, int k, int p) {
 }
 
 // need extgcd
-ll ChineseRemaiderTherom(const vector<ll> &anss, const vector<ll> &mods) {
+ll ChineseRemainderTherom(const vector<ll> &anss, const vector<ll> &mods) {
   assert(anss.size() == mods.size());
   ll all = 1;
   for (int i = 0; i < (int)mods.size(); i++) {
