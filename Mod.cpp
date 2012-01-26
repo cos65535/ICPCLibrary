@@ -66,3 +66,21 @@ ll ChineseRemainderTherom(const vector<ll> &anss, const vector<ll> &mods) {
   }
   return ret;
 }
+
+pair<ll, ll> LinearCongruence(const vector<ll> &A, const vector<ll> &B, const vector<ll> &M) {
+  ll x = 0;
+  ll m = 1;
+  for (ll i = 0; i < (ll)A.size(); i++) {
+    ll a = A[i] * m;
+    ll b = B[i] - A[i] * x;
+    ll d = gcd(M[i], a);
+    if (b % d != 0) { return make_pair(0, -1); }
+    if (a == 0) { continue; }
+    ll t = b / d * InvMod(a / d, M[i] / d) % (M[i] / d);
+    x = x + m * t;
+    m *= M[i] / d;
+  }
+  x %= m;
+  if (x < 0) { x += m; }
+  return make_pair(x % m, m);
+}
