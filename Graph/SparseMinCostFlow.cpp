@@ -45,7 +45,7 @@ pair<Weight, Weight> MinCostFlow(const Graph &g, int e, int s, int t) {
     bool end = true;
     for (int from = 0; from < n; from++) {
       for (int i = 0; i < (int)g[from].size(); i++) {
-        if (g[from][i].capacity <= 0) { continue; }
+        if (capacity[g[from][i].index] <= 0) { continue; }
         int to = g[from][i].dest;
         Weight ncost = prev_dist[from] + g[from][i].cost;
         if (ncost < prev_dist[to]) {
