@@ -4,7 +4,7 @@ Polygon ConvexCut(const Polygon &P, const Line &l) {
     Point A = CURR(P, i), B = NEXT(P, i);
     if (ccw(l[0], l[1], A) != -1) { Q.push_back(A); }
     if (ccw(l[0], l[1], A) * ccw(l[0], l[1], B) < 0) {
-      Q.push_back(crosspoint(Line(A, B), l));
+      Q.push_back(crosspointSS(Line(A, B), l));
     }
   }
   return Q;
