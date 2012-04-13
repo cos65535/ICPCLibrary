@@ -23,3 +23,9 @@ SparseMinCostFlow.cpp
 Dijkstra.cpp
   AOJ 2283 (Seishun 18 Kippu)
   AOJ 2334 (Roads on Towns)
+
+SPFA.cpp
+  UVa Live Archive 5717 (Peach Blossom Spring)
+  
+SteinerTree.cpp
+  UVa Live Archive 5717 (Peach Blossom Spring)
