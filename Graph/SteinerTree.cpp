@@ -28,7 +28,7 @@ int DreyfusWanger(const Graph &g, const vector<int> &terminal) {
   for (int code = 1; code < (1 << s); code++) {
     for (int div = code & -code; div < code; div = (div - code) & code) {
       for (int q = 0; q < n; q++) {
-        opt[code][q] = min(opt[q][code], opt[div][q] + opt[div ^ code][q]);
+        opt[code][q] = min(opt[code][q], opt[div][q] + opt[div ^ code][q]);
       }
     }
     for (int q = 0; q < n; q++) {
