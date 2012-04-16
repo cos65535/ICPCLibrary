@@ -4,8 +4,8 @@ vector<Line> tangentCP(const Circle &c, const Point &p) {
   double d = abs(vect);
   double l = sqrt(norm(vect) - c.r * c.r);
   if (isnan(l)) { return ret; }
-  Point v1 = vect * Point(l / d,  c.r / d); 
-  Point v2 = vect * Point(l / d, -c.r / d); 
+  Point v1 = vect * Point(l / d,  c.r / d);
+  Point v2 = vect * Point(l / d, -c.r / d);
   ret.push_back(Line(p - v1 * INF, p + v1 * INF));
   if (l > EPS) {
     ret.push_back(Line(p - v2 * INF, p + v2 * INF));
