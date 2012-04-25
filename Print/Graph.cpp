@@ -255,41 +255,84 @@ Weight Arborescence(const Graph &g, int root) {
 //==============================================================
 // Steiner Tree
 
-int matrix[20][20];
-int opt[20][1 << 10];
-pair<int, int> opt_parent[20][1 << 10];
-int source[10];
-void DreyfusWanger() {
-  REP(k, n) REP(i, n) REP(j, n)
-    matrix[i][j] = min(matrix[i][j], matrix[i][k] + matrix[k][j]);
-  memset(opt, 0x01, sizeof(opt));
-  memset(opt_parent, -1, sizeof(opt));
-  for (int i = 0; i < size; i++) {
-    for (int q = 0; q < n; q++) {
-      opt[q][1 << i] = matrix[q][source[i]];
-      opt[q][0] = 0;
+int DreyfusWanger(const Graph &g, const vector<int> &terminal) {
+  const int n = g.size();
+  const int s = terminal.size();
+
+  // init dist
+  Matrix dist(n, Array(n, 1LL << 30));
+  for (int i = 0; i < n; i++) { dist[i][i] = 0; }
+  for (int from = 0; from < n; from++) {
+    for (Edges::iterator it = g[from].begin(); it != g[from].end(); it++) {
+      dist[it->src][it->dest] = min(dist[it->src][it->dest], it->cost);
     }
   }
-  for (int i = 2; i <= size; i++) {
-    for (int start = 0; start < n; start++) {
-      for (int code = 0; code < (1 << size); code++) {
-        if (__bultin_popcount(code) != i) { continue; }
-        for (int div = 1; div < code; div++) {
-          if (__builtin_popcount(div | code) != i) { continue; }
-          for (int q = 0; q < n; q++) {
-            //opt[start][code] = min(opt[start][code], matrix[q][start] + opt[q][div] + opt[q][div ^ code]);
-            int cost = matrix[q][start] + opt[q][div] + opt[q][div ^ code];
-            if (cost < opt[start][code]) {
-              opt[start][code] = cost;
-              opt_parent[start][code].first = q;
-              opt_parent[start][code].second = div;
-            }
-          }
-        }
+
+  REP(k, n) REP(i, n) REP(j, n)
+    dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]);
+
+  // init opt
+  vector<vector<int> > opt(1 << s, vector<int>(n, 1LL << 30));
+  for (int i = 0; i < s; i++) {
+    for (int q = 0; q < n; q++) {
+      opt[1 << i][q] = matrix[terminal[i]][q];
+      opt[0][q] = 0;
+    }
+  }
+
+  // calc opt
+  for (int code = 1; code < (1 << s); code++) {
+    for (int div = code & -code; div < code; div = (div - code) & code) {
+      for (int q = 0; q < n; q++) {
+        opt[code][q] = min(opt[code][q], opt[div][q] + opt[div ^ code][q]);
+      }
+    }
+    for (int q = 0; q < n; q++) {
+      for (int end = 0; end < n; end++) {
+        opt[code][end] = min(opt[code][end], opt[code][q] + dist[q][end]);
       }
     }
   }
+
+  int ret = 1 << 30;
+  REP(i, n) { ret = min(ret, opt[(1 << s) - 1][i]); }
+  return ret;
 }
+// int matrix[20][20];
+// int opt[20][1 << 10];
+// pair<int, int> opt_parent[20][1 << 10];
+// int source[10];
+// void DreyfusWanger() {
+//   REP(k, n) REP(i, n) REP(j, n)
+//     matrix[i][j] = min(matrix[i][j], matrix[i][k] + matrix[k][j]);
+//   memset(opt, 0x01, sizeof(opt));
+//   memset(opt_parent, -1, sizeof(opt));
+//   for (int i = 0; i < size; i++) {
+//     for (int q = 0; q < n; q++) {
+//       opt[q][1 << i] = matrix[q][source[i]];
+//       opt[q][0] = 0;
+//     }
+//   }
+//   for (int i = 2; i <= size; i++) {
+//     for (int start = 0; start < n; start++) {
+//       for (int code = 0; code < (1 << size); code++) {
+//         if (__bultin_popcount(code) != i) { continue; }
+//         for (int div = 1; div < code; div++) {
+//           if (__builtin_popcount(div | code) != i) { continue; }
+//           for (int q = 0; q < n; q++) {
+//             //opt[start][code] = min(opt[start][code], matrix[q][start] + opt[q][div] + opt[q][div ^ code]);
+//             int cost = matrix[q][start] + opt[q][div] + opt[q][div ^ code];
+//             if (cost < opt[start][code]) {
+//               opt[start][code] = cost;
+//               opt_parent[start][code].first = q;
+//               opt_parent[start][code].second = div;
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
 
 //=========================================================
 // Sparse Dinic
@@ -313,8 +356,8 @@ typedef vector<Weight> Array;
 typedef vector<Array> Matrix;
 
 void PrintMatrix(const Matrix &matrix) {
-  for (int y = 0; y < (int)matrix.size(); y++) {
-    for (int x = 0; x < (int)matrix[y].size(); x++) {
+  REP(y, matrix.size()) {
+    REP(x, matrix[y].size()) {
       printf("%d ", matrix[y][x]);
     }
     puts("");
@@ -387,7 +430,6 @@ void AddEdge(Graph &g, int &e, int from, int to, Weight capacity) {
 //==================================================================
 // Sparse Min Cost Flow
 
-
 typedef int Weight;
 struct Edge {
   int index;
@@ -435,7 +477,7 @@ pair<Weight, Weight> MinCostFlow(const Graph &g, int e, int s, int t) {
     bool end = true;
     for (int from = 0; from < n; from++) {
       for (int i = 0; i < (int)g[from].size(); i++) {
-        if (g[from][i].capacity <= 0) { continue; }
+        if (capacity[g[from][i].index] <= 0) { continue; }
         int to = g[from][i].dest;
         Weight ncost = prev_dist[from] + g[from][i].cost;
         if (ncost < prev_dist[to]) {

@@ -39,6 +39,8 @@ int DreyfusWanger(const Graph &g, const vector<int> &terminal) {
   }
 
   int ret = 1 << 30;
-  REP(i, n) { ret = min(ret, opt[(1 << s) - 1][i]); }
+  for (int i = 0; i < n; i++) {
+    ret = min(ret, opt[(1 << s) - 1][i]);
+  }
   return ret;
 }

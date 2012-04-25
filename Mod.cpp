@@ -67,6 +67,7 @@ ll ChineseRemainderTherom(const vector<ll> &anss, const vector<ll> &mods) {
   return ret;
 }
 
+// solve A[i] x == B[i] (mod M[i])
 pair<ll, ll> LinearCongruence(const vector<ll> &A, const vector<ll> &B, const vector<ll> &M) {
   ll x = 0;
   ll m = 1;

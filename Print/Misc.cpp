@@ -63,7 +63,7 @@ struct Node {
   Node(int n) : num(n) {;}
 };
 
-inline Node merge(Node left, Node right) {
+inline Node Merge(Node left, Node right) {
   return Node(left.num < right.num ? left.num : right.num);
 }
 
@@ -77,7 +77,7 @@ struct SegmentTree {
     data[target] = value;
     for (int i = 1; i <= MAX_DEPTH; i++) {
       target >>= 1;
-      data[target] = merge(data[target * 2], data[target * 2 + 1]);
+      data[target] = Merge(data[target * 2], data[target * 2 + 1]);
     }
   }
   Node get(int left, int right) {
@@ -97,7 +97,84 @@ private:
     } else if (left >= node_mid) {
       return in_get(depth + 1, node * 2 + 1, left, right);
     }
-    return merge(in_get(depth + 1, node * 2, left, node_mid - 1), in_get(depth + 1, node * 2 + 1, node_mid, right));
+    return Merge(in_get(depth + 1, node * 2, left, node_mid - 1), in_get(depth + 1, node * 2 + 1, node_mid, right));
+  }
+};
+
+struct Node {
+  int lower;
+  int upper;
+  Node() {;}
+  Node(int lower, int upper)
+    : lower(lower), upper(upper) {;}
+};
+
+inline Node Merge(Node left, Node right) {
+  return Node(min(left.lower, right.lower), max(left.upper, right.upper));
+}
+
+struct SegmentTree {
+  static const int MAX_DEPTH = 18;
+  static const int SIZE = 1 << (MAX_DEPTH + 1);  // 2^18 = 262144
+
+  bool updated[SIZE];
+  Node data[SIZE];
+  SegmentTree() { memset(updated, false, sizeof(updated)); }
+  void set(Node v, int left, int right) {
+    assert(left <= right);
+    return in_set(v, 0, 1, left, right);
+  }
+  Node get(int left, int right) {
+    assert(left <= right);
+    return in_get(0, 1, left, right);
+  }
+
+private:
+  void Divide(int node) {
+    if (!updated[node] || node >= (1 << MAX_DEPTH)) { return; }
+    updated[node] = false;
+    updated[node * 2] = true;
+    updated[node * 2 + 1] = true;
+    data[node * 2] = data[node];
+    data[node * 2 + 1] = data[node];
+  }
+
+  void in_set(Node v, int depth, int node, int left, int right) {
+    int width = 1 << (MAX_DEPTH - depth);
+    int index = node - (1 << depth);
+    int node_left = index * width;
+    int node_mid = node_left + (width >> 1);
+    Divide(node);
+    if (right - left + 1 == width && left == node_left) {
+      updated[node] = true;
+      data[node] = v;
+    } else {
+      if (right < node_mid) {
+        in_set(v, depth + 1, node * 2, left, right);
+      } else if (left >= node_mid) {
+        in_set(v, depth + 1, node * 2 + 1, left, right);
+      } else {
+        in_set(v, depth + 1, node * 2, left, node_mid - 1);
+        in_set(v, depth + 1, node * 2 + 1, node_mid, right);
+      }
+      data[node] = Merge(data[node * 2], data[node * 2 + 1]);
+    }
+  }
+
+  Node in_get(int depth, int node, int left, int right) {
+    int width = 1 << (MAX_DEPTH - depth);
+    int index = node - (1 << depth);
+    int node_left = index * width;
+    int node_mid = node_left + (width >> 1);
+    Divide(node);
+    if (right - left + 1 == width && left == node_left) {
+      return data[node];
+    } else if (right < node_mid) {
+      return in_get(depth + 1, node * 2, left, right);
+    } else if (left >= node_mid) {
+      return in_get(depth + 1, node * 2 + 1, left, right);
+    }
+    return Merge(in_get(depth + 1, node * 2, left, node_mid - 1), in_get(depth + 1, node * 2 + 1, node_mid, right));
   }
 };
 
@@ -148,7 +225,7 @@ int ModCombi(int n, int k, int p) {
 }
 
 // need extgcd
-ll ChineseRemaiderTherom(const vector<ll> &anss, const vector<ll> &mods) {
+ll ChineseRemainderTherom(const vector<ll> &anss, const vector<ll> &mods) {
   assert(anss.size() == mods.size());
   ll all = 1;
   for (int i = 0; i < (int)mods.size(); i++) {
@@ -163,6 +240,25 @@ ll ChineseRemaiderTherom(const vector<ll> &anss, const vector<ll> &mods) {
     assert(ret >= 0); 
   }
   return ret;
+}
+
+// solve A[i] x == B[i] (mod M[i])
+pair<ll, ll> LinearCongruence(const vector<ll> &A, const vector<ll> &B, const vector<ll> &M) {
+  ll x = 0;
+  ll m = 1;
+  for (ll i = 0; i < (ll)A.size(); i++) {
+    ll a = A[i] * m;
+    ll b = B[i] - A[i] * x;
+    ll d = gcd(M[i], a);
+    if (b % d != 0) { return make_pair(0, -1); }
+    if (a == 0) { continue; }
+    ll t = b / d * InvMod(a / d, M[i] / d) % (M[i] / d);
+    x = x + m * t;
+    m *= M[i] / d;
+  }
+  x %= m;
+  if (x < 0) { x += m; }
+  return make_pair(x % m, m);
 }
 
 //================================================================
