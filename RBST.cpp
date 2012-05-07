@@ -53,8 +53,8 @@ RBST *Insert(RBST *t, int k, Node v) {
 }
 
 RBST *Erase(RBST *t, int k) {
-  pair<RBST*, RBST*> s1 = Split(t, k);
-  pair<RBST*, RBST*> s2 = Split(s1.first, k - 1);
+  pair<RBST*, RBST*> s1 = Split(t, k + 1);
+  pair<RBST*, RBST*> s2 = Split(s1.first, k);
   return Merge(s2.first, s1.second);
 }
 
