@@ -23,3 +23,6 @@ GaussElimination.cpp
 
 MillarRabin.cpp
   SRM524 div1 250 (Magic Diamonds)
+
+RBST.cpp
+  UVa 11922 (Permutation Transformer)
