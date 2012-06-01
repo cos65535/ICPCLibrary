@@ -3,23 +3,24 @@ int DreyfusWanger(const Graph &g, const vector<int> &terminal) {
   const int s = terminal.size();
 
   // init dist
-  Matrix dist(n, Array(n, 1LL << 30));
+  Matrix dist(n, Array(n, 1LL << 28));
   for (int i = 0; i < n; i++) { dist[i][i] = 0; }
   for (int from = 0; from < n; from++) {
-    for (Edges::iterator it = g[from].begin(); it != g[from].end(); it++) {
-      dist[it->src][it->dest] = min(dist[it->src][it->dest], it->cost);
+    for (Edges::const_iterator it = g[from].begin(); it != g[from].end(); it++) {
+      dist[it->src][it->dest] = min(dist[it->src][it->dest], it->weight);
     }
   }
+  for (int i = 0; i < n; i++) dist[i][i] = 0;
   for (int k = 0; k < n; k++)
     for (int i = 0; i < n; i++)
       for (int j = 0; j < n; j++)
         dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]);
 
   // init opt
-  vector<vector<int> > opt(1 << s, vector<int>(n, 1LL << 30));
+  vector<vector<int> > opt(1 << s, vector<int>(n, 1LL << 28));
   for (int i = 0; i < s; i++) {
     for (int q = 0; q < n; q++) {
-      opt[1 << i][q] = matrix[terminal[i]][q];
+      opt[1 << i][q] = dist[terminal[i]][q];
       opt[0][q] = 0;
     }
   }
@@ -38,7 +39,7 @@ int DreyfusWanger(const Graph &g, const vector<int> &terminal) {
     }
   }
 
-  int ret = 1 << 30;
+  int ret = 1LL << 28;
   for (int i = 0; i < n; i++) {
     ret = min(ret, opt[(1 << s) - 1][i]);
   }
