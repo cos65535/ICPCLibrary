@@ -24,12 +24,11 @@ static const double PI = acos(-1.0);
 #define FORIT(it, c) for (__typeof((c).begin())it = (c).begin(); it != (c).end(); it++)
 #define MEMSET(v, h) memset((v), h, sizeof(v))
 
+int test = 0;
 class $CLASSNAME$ {
   public:
     $RC$ $METHODNAME$($METHODPARMS$) {
-      static int test = 0;
-      test++;
-      //if (test != 1) { return 0; }
+      //if (test++ != 0) { return 0; }
 
     }
 
