@@ -246,11 +246,11 @@ bool TwiceEdge(const Graph &g) {
   return false;
 }
 
-Graph Rename(Graph g) {
+Graph Rename(const Graph &g) {
   const int n = g.size();
   mapto = vector<int>(n);
   REP(i, n) { mapto[i] = i; }
-  shuffle(mapto.begin() + 1, mapto.end() - 1);
+  shuffle(mapto.begin(), mapto.end());
 
   Graph retG(n);
   REP(i, n) {
@@ -279,13 +279,11 @@ Graph OutputGraph(FILE *fp, Graph g, bool renameVertex = true, bool shuffleEdge 
     REP(i, n) { mapto[i] = i; }
   }
   fprintf(fp, "%d %d\n", n, m);
-  Edges edges;
-  REP(i, n) FORIT(it, g[i]) { edges.push_back(*it); }
+  Edges edges = GraphToEdges(g);
   if (shuffleEdge) {
     shuffle(edges.begin(), edges.end());
   }
   FORIT(it, edges) {
-    if (!UNIDIRECT && it->src > it->dest) { continue; }
     if (!UNIDIRECT && shuffleEdge && rnd.next(0, 1)) {
       swap(it->src, it->dest);
     }
