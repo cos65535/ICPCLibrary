@@ -17,7 +17,7 @@ struct SegmentTree {
   bool updated[SIZE];
   Node data[SIZE];
   SegmentTree() { memset(updated, false, sizeof(updated)); }
-  void set(Node v, int left, int right) {
+  void set(int left, int right, Node v) {
     assert(left <= right);
     return in_set(v, 0, 1, left, right);
   }
