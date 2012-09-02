@@ -3,18 +3,19 @@
 // ./a.out 2> data.js
 // firefox Visualize.html
 int zoom = 10;
+const int OFFSET = 1000;
 #ifdef visualize
 void ChangeColor(int r, int g, int b) {
   fprintf(stderr, "c.strokeStyle = 'rgb(%d, %d, %d)';\n", r, g, b);
 }
 void DrawPoint(const Point &p) {
   fprintf(stderr, "circle(%d, %d, %d)\n",
-      (int)(zoom*p.real()), 1980-(int)(zoom*p.imag()), 2);
+      (int)(OFFSET+zoom*p.real()), 1980-OFFSET-(int)(zoom*p.imag()), 2);
 }
 void DrawLine(const Line &l) {
   fprintf(stderr, "line(%d, %d, %d, %d)\n",
-      (int)(zoom*l[0].real()), 1980-(int)(zoom*l[0].imag()),
-      (int)(zoom*l[1].real()), 1980-(int)(zoom*l[1].imag()));
+      (int)(OFFSET+zoom*l[0].real()), 1980-OFFSET-(int)(zoom*l[0].imag()),
+      (int)(OFFSET+zoom*l[1].real()), 1980-OFFSET-(int)(zoom*l[1].imag()));
 }
 void DrawPolygon(const Polygon &p) {
   const int n = p.size();
