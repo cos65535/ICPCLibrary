@@ -19,3 +19,6 @@ ThreePointCircle.cpp
 
 MaxPointCircle.cpp
   PKU 1981 (Circle and Points)
+
+Arrangement.cpp
+  AOJ 2454 (Repairing)
