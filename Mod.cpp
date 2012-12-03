@@ -49,20 +49,47 @@ int ModCombi(int n, int k, int p) {
   return a1 * InvMod(a2 * a3 % p, p) % p;
 }
 
-// need extgcd
-ll ChineseRemainderTherom(const vector<ll> &anss, const vector<ll> &mods) {
-  assert(anss.size() == mods.size());
-  ll all = 1;
-  for (int i = 0; i < (int)mods.size(); i++) {
-    all *= mods[i];
-  }
+ll Mul(ll a, ll b, ll mod) {
+  a %= mod;
+  b %= mod;
+  if (mod < 2e+9) { return a * b % mod; }
   ll ret = 0;
-  for (int i = 0; i < (int)anss.size(); i++) {
+  while (b > 0) {
+    if (b & 1) { ret = (ret + a) % mod; }
+    a = (a + a) % mod;
+    b >>= 1;
+  }
+  return ret;
+}
+
+// need extgcd
+pair<ll, ll> PairChineseRemainderTherom(ll ans1, ll mod1, ll ans2, ll mod2) {
+  ll g = gcd(mod1, mod2);
+  if (ans1 % g != ans2 % g) { return make_pair(-1, -1); }
+  const ll anss[2] = { ans1 / g, ans2 / g };
+  const ll mods[2] = { mod1 / g, mod2 / g };
+  ll all = mods[0] * mods[1];
+  assert(all * g / g / mods[0] == mods[1]);
+  ll ret = 0;
+  for (int i = 0; i < 2; i++) {
     ll x, y;
     extgcd(mods[i], all / mods[i], x, y); 
     y = (y + all) % all;
-    ret = (ret + (anss[i] + all) % all * y * (all / mods[i]) % all) % all;
+    ll v = Mul(y, anss[i], all);
+    v = Mul(v, all / mods[i], all);
+    ret = (ret + v) % all;
     assert(ret >= 0); 
+  }
+  ret = ret * g + ans1 % g;
+  return make_pair(ret, all * g);
+}
+
+pair<ll, ll> ChineseRemainderTherom(const vector<ll> &anss, const vector<ll> &mods) {
+  assert(anss.size() == mods.size());
+  pair<ll, ll> ret(anss[0], mods[0]);
+  for (int i = 1; i < (int)anss.size(); i++) {
+    ret = PairChineseRemainderTherom(ret.first, ret.second, anss[i], mods[i]);
+    if (ret.first == -1) { return ret; }
   }
   return ret;
 }
