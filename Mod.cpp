@@ -102,6 +102,8 @@ pair<ll, ll> ChineseRemainderTherom(const vector<ll> &anss, const vector<ll> &mo
 ll Divide(ll A, ll B, ll M) {
   A %= M; A = (A + M) % M;
   B %= M; B = (B + M) % M;
+  ll tg = gcd(A, gcd(B, M));
+  A /= tg; B /= tg; M /= tg;
   ll g = gcd(A, M);
   if (B % g != 0) { return -1; }
   ll x, y;
