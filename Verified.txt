@@ -29,3 +29,6 @@ RBST.cpp
 
 Mod.cpp (ChineseRemainderTherom)
   UVa 11999 (Unlock)
+
+Mod.cpp (LinearCongruence)
+  AOJ 2234 (Usagitobi)
