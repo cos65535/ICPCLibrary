@@ -45,7 +45,7 @@ pair<RBST*, RBST*> Split(RBST *t, int k) {
 }
 
 RBST *Insert(RBST *t, int k, Node v) {
-  asert(pool != NULL);
+  assert(pool != NULL);
   pair<RBST*, RBST*> s = Split(t, k);
   RBST *val = pool++;
   *val = RBST(v);
