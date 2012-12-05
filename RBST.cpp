@@ -14,7 +14,7 @@ struct RBST {
 RBST _pool[1000000];
 RBST *pool = NULL;
 
-int Count(RBST *t) { return t ? t->size : 0; }
+int Count(const RBST *t) { return t ? t->size : 0; }
 
 RBST *Merge(RBST *l, RBST *r) {
   if (!l) { return r; }

@@ -19,6 +19,7 @@ SkewHeap *Meld(SkewHeap *a, SkewHeap *b) {
 }
 
 SkewHeap *Push(SkewHeap *a, const Node &v) {
+  assert(pool != NULL);
   SkewHeap *b = pool++;
   *b = SkewHeap(v);
   return Meld(a, b);
