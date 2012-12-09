@@ -1,31 +1,11 @@
-FenwickTree.cpp
-  AOJ 1083 (The Incubator)
-
-AhoCorasick.cpp
-  ZOJ 3545 (Rescue the Rabbit)
-  PKU 1204 (Word Puzzles)
-  UVa Live Archive 3907 (Puzzle)
-  UVa 10679 (I Love Strings!!)
-
-SuffixArray.cpp
-  UVa Live Archive 2680 (Crazy Search)
-  UVa Live Archive 3901 (Editor)
-  UVa 10679 (I Love Strings!!)
-
 Convolution.cpp
   AOJ 2268 (Randomized Self-Balancing Binary Search Tree)
-
-Long.cpp (very slow)
-  UVa 12316 (Sewing Buttons with Grandma)
 
 GaussElimination.cpp
   UVa Live Archive 4531 (Movie Promotion)
 
 MillarRabin.cpp
   SRM524 div1 250 (Magic Diamonds)
-
-RBST.cpp
-  UVa 11922 (Permutation Transformer)
 
 Mod.cpp (ChineseRemainderTherom)
   UVa 11999 (Unlock)

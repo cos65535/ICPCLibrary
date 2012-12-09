@@ -1,0 +1,10 @@
+AhoCorasick.cpp
+  ZOJ 3545 (Rescue the Rabbit)
+  PKU 1204 (Word Puzzles)
+  UVa Live Archive 3907 (Puzzle)
+  UVa 10679 (I Love Strings!!)
+
+SuffixArray.cpp
+  UVa Live Archive 2680 (Crazy Search)
+  UVa Live Archive 3901 (Editor)
+  UVa 10679 (I Love Strings!!)
