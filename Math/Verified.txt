@@ -7,8 +7,8 @@ GaussElimination.cpp
 MillarRabin.cpp
   SRM524 div1 250 (Magic Diamonds)
 
-Mod.cpp (ChineseRemainderTherom)
+ChineseRemainderTherom.cpp (ChineseRemainderTherom)
   UVa 11999 (Unlock)
 
-Mod.cpp (LinearCongruence)
+ChineseRemainderTherom.cpp (LinearCongruence)
   AOJ 2234 (Usagitobi)
