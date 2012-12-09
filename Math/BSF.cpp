@@ -1,3 +1,4 @@
+// return smallest 1 bit index
 inline int bsf(long long n)
 {
   int z;
