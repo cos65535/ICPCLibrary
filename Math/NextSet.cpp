@@ -1,6 +1,5 @@
 // return v s.t. |v| == |x| && v > x
-inline unsigned int NextSet(unsigned int x)
-{
+inline unsigned int NextSet(unsigned int x) {
   unsigned int smallest = x & -x;
   unsigned int ripple = x + smallest;
   unsigned int new_smallest = ripple & -ripple;
@@ -11,7 +10,6 @@ inline unsigned int NextSet(unsigned int x)
 // Usage:
 // for (int T = S & -S; T; T = NextSubset(T, S)) {
 // }
-inline unsigned NextSubset(unsigned S, unsigned U)
-{
+inline unsigned NextSubset(unsigned int S, unsigned int U) {
   return (S - U) & U;
 }
