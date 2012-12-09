@@ -1,4 +1,4 @@
-long long combi(ll n, ll r) {
+long long combi(long long n, long long r) {
   if (r < 0 || n < r) { return 0; }
   r = min(r, n - r);
   ll ret = 1;
