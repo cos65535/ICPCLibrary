@@ -41,7 +41,7 @@ struct HeavyLightDecomposition {
   }
 
 private:
-  int Decomposition(int from, int parent, int depth, int pnumber, int pindex, vector<int> &size) {
+  int Decomposition(int from, int parent, int depth, int pnumber, int pindex, const vector<int> &size) {
     const int c = chains.size();
     chains.push_back(Chain());
     chains[c].depth = depth;
