@@ -1,8 +1,9 @@
 // need Eratosthenes
-vector<pair<int, int> > PrimeFactorization(int n) {
-  vector<pair<int, int> > ret;
-  for (int i = 0; i < psize && i * i <= n; i++) {
-    if (prime[i] * prime[i] > n) { break; }
+vector<pair<long long, int> > PrimeFactorization(long long n) {
+  assert(n > 1);
+  assert(psize != 0);
+  vector<pair<long long, int> > ret;
+  for (int i = 0; i < psize && (long long)prime[i] * prime[i] <= n; i++) {
     int size = 0;
     while (n % prime[i] == 0) {
       n /= prime[i];
