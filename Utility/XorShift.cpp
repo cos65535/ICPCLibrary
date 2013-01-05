@@ -4,9 +4,11 @@ struct Random {
   unsigned int z;
   unsigned int w; 
   Random() : x(0x34fb2383), y(0x327328fa), z(0xabd4b54a), w(0xa9dba8d1) {;}
+  Random(int s) : x(0x34fb2383), y(0x327328fa), z(0xabd4b54a), w(s) {
+    for (int i = 0; i < 100; i++) { Xor128(); }
+  }
   void Seed(int s) {
-    *this = Random();
-    w = s;
+    *this = Random(s);
   }
   unsigned int Xor128() {
     unsigned int t;
