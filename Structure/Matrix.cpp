@@ -99,7 +99,7 @@ struct Vector {
 template<class T>
 ostream &operator<<(ostream &os, const Vector<T> &rhs) {
   for (int i = 0; i < rhs.size(); i++) { os << rhs.vect[i] << " "; }
-  os << endl;
+  //os << endl;
   return os;
 }
 template<class T>
@@ -281,7 +281,10 @@ struct Matrix {
 };
 template <class T>
 ostream &operator<<(ostream &os, const Matrix<T> &rhs) {
-  for (int i = 0; i < rhs.size(); i++) { os << rhs.vects[i]; }
+  for (int i = 0; i < rhs.size(); i++) {
+    os << rhs.vects[i];
+    if (i != rhs.size() - 1) { os << endl; }
+  }
   return os;
 }
 
