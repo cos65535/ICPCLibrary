@@ -25,7 +25,7 @@ void DrawPolygon(const Polygon &p) {
 }
 void DrawCircle(const Circle &c) {
   fprintf(stderr, "circle(%d, %d, %d)\n",
-      (int)(zoom * c.p.real()), 1980 - (int)(zoom * c.p.imag()), (int)(zoom * c.r));
+      (int)(OFFSET + zoom * c.p.real()), 1980 - OFFSET - (int)(zoom * c.p.imag()), (int)(zoom * c.r));
 }
 #else
 void DrawPoint(const Point &p) {;}
@@ -34,6 +34,8 @@ void DrawLine(Line l) {;}
 void DrawPolygon(const Polygon &p) {;}
 void DrawCircle(Circle c) {;}
 #endif
+void DrawCircle(const Point &p, double r) { DrawCircle(Circle(p, r)); }
+
 int main(int argc, char *argv[]) {
   if (argc > 1) { zoom = atoi(argv[1]); }
 }
