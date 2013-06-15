@@ -1,7 +1,7 @@
 static const Weight INF = 2000000000LL;
 vector<Weight> SPFA(const Graph &g, int s) {
   const int n = g.size();
-  vector<Weight> dist = vector<Weight>(n, 1 << 28);
+  vector<Weight> dist = vector<Weight>(n, 1LL << 28);
   dist[s] = 0;
   vector<int> updated(n, 0);
   vector<bool> inque(n, false);
