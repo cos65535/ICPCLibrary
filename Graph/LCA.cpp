@@ -5,21 +5,16 @@ struct LCA {
   int depth[SIZE];
   LCA() {;}
   LCA(const Graph &g, int root) {
+    init(g, root);
+  }
+  void init(const Graph &g, int root) {
     int n = g.size();
     assert(n <= SIZE);
-    dfs(g, root, root, 0);
+    bfs(g, root);
     for (int iter = 0; iter < LOG_SIZE - 1; iter++) {
       for (int i = 0; i < n; i++) {
         parent[i][iter + 1] = parent[parent[i][iter]][iter];
       }
-    }
-  }
-  void dfs(const Graph &g, int v, int p, int d) {
-    depth[v] = d;
-    parent[v][0] = p;
-    for (Edges::const_iterator it = g[v].begin(); it != g[v].end(); it++) {
-      if (it->dest == p) { continue; }
-      dfs(g, it->dest, v, d + 1);
     }
   }
   int lca(int u, int v) {
@@ -35,5 +30,23 @@ struct LCA {
       }
     }
     return parent[u][0];
+  }
+private:
+  void bfs(const Graph &g, int root) {
+    depth[root] = 0;
+    parent[root][0] = root;
+    queue<int> que;
+    que.push(root);
+    while (!que.empty()) {
+      int node = que.front();
+      que.pop();
+      for (Edges::const_iterator it = g[node].begin(); it != g[node].end(); it++) {
+        int next = it->dest;
+        if (next == parent[node][0]) { continue; }
+        parent[next][0] = node;
+        depth[next] = depth[node] + 1;
+        que.push(next);
+      }
+    }
   }
 };
