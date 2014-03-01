@@ -53,7 +53,10 @@ const int ORIGIN = 0; // if 0 is zero origin, 1 is one origin
 const int VERTEX_MAX = 0xdeadbeaf;
 const Weight NOP_VALUE = 0xdeadbeaf;
 vector<int> mapto; // updated by Rename
-double P; // used by SkewTree
+double POWER_RANDOM_P = 5.0; // used by PowerRandomTre
+int SKEW_T = 1; // used by SkewTree
+double SKEW_U = 1.0;  // used by SkewTree
+double SKEW_P; // used by SkewTree
 
 //=================================================================
 // Base
@@ -177,6 +180,45 @@ int CountEdge(const Graph &g) {
   return m;
 }
 
+int MaxDegree(const Graph &g) {
+  int max_degree = 0;
+  REP(i, g.size()) {
+    max_degree = max(max_degree, (int)g[i].size());
+  }
+  return max_degree;
+}
+
+// for Tree
+int Diameter(const Graph &g) {
+  const int n = g.size();
+  int start = 0;
+  int last = -1;
+  int max_depth = 0;
+  REP(iter, 2) {
+    vector<int> depth(n, -1);
+    vector<int> parent(n, -1);
+    queue<int> que;
+    que.push(start);
+    depth[start] = 0;
+    parent[start] = start;
+    while (!que.empty()) {
+      int from = que.front();
+      que.pop();
+      last = from;
+      max_depth = max(max_depth, depth[from]);
+      FORIT(it, g[from]) {
+        int to = it->dest;
+        if (to == parent[from]) { continue; }
+        depth[to] = depth[from] + 1;
+        parent[to] = from;
+        que.push(to);
+      }
+    }
+    start = last;
+  }
+  return max_depth;
+}
+
 Graph Merge(const vector<Graph> &gs) {
   int n = 0;
   int m = gs.size();
@@ -296,6 +338,27 @@ Graph OutputGraph(FILE *fp, Graph g, bool renameVertex = true, bool shuffleEdge 
   return g;
 }
 
+
+void OutputGraphviz(const Graph &g, const char *filename) {
+  const int n = g.size();
+  if (n > 10000) { return; }
+  FILE *fp = fopen(filename, "w");
+  assert(fp);
+  fprintf(fp, "digraph hoge {\n");
+  string dir = UNIDIRECT ? "forward" : "none";
+  REP(i, n) {
+    REP(j, g[i].size()) {
+      const Edge e = g[i][j];
+      char weight[100] = "";
+      if (!UNIDIRECT && e.dest < e.src) { continue; }
+      if (EXIST_WEIGHT) { snprintf(weight, 99, ", label=\"%lf\"", (double)e.weight); }
+      fprintf(fp, "  %d -> %d [dir = %s%s]\n", e.src, e.dest, dir.c_str(), weight);
+    }
+  }
+  fprintf(fp, "}\n");
+  fclose(fp);
+}
+
 //=================================================================
 // Graph Generator
 //=================================================================
@@ -369,16 +432,38 @@ Graph RandomTree(int n) {
   return g;
 }
 
-// if rnd.next(1.0) < p, vertex i is connected by vertex i - 1
-// else vertex i is connected by vertex [0, i - 1] with uniform distribution
-// p = 0.0 then diameter is large
-// p = 1.0 then there exist large degree vertex
+// maybe slow
+Graph PowerRandomTree(int n) {
+  UnionFind ufind;
+  Graph g(n);
+  REP(f, n - 1) {
+    double r = rnd.next(pow(n, POWER_RANDOM_P));
+    int t = pow(r, 1.0 / POWER_RANDOM_P);
+    if (!ufind.unionSet(f, t)) {
+      f--;
+      continue;}
+    AddEdge(g, f, t, 0);
+  }
+  return g;
+}
+
+// if rnd.next(1.0) < p, vertex i is connected to candidate vertex 
+// else vertex i is connected to vertex [0, i - 1] with uniform distribution
+// p == 1 && u = 1.0 then diameter is large
+// p == 1 && u = 0.0 then there exist large degree vertex
 Graph SkewTree(int n) {
   Graph g(n);
+  vector<int> cand(SKEW_T);
   FOR(t, 1, n) {
-    int f = t - 1;
-    if (rnd.next(1.0) < P) {
+    int f = -1;
+    if (rnd.next(1.0) < SKEW_P) {
       f = rnd.next(t);
+    } else {
+      int r = rnd.next(SKEW_T);
+      f = cand[r] != -1 ? cand[r] : t - 1;
+      if (rnd.next(1.0) < SKEW_U) {
+        cand[r] = t;
+      }
     }
     AddEdge(g, f, t, 0);
   }
