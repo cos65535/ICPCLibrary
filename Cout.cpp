@@ -39,3 +39,8 @@ ostream &operator<<(ostream &os, const set<T> &rhs) {
   os << " }";
   return os;
 }
+template <class T, class U>
+ostream &operator<<(ostream &os, const pair<T, U> &rhs) {
+  os << "( " << rhs.first << ", " << rhs.second << " )";
+  return os;
+}
