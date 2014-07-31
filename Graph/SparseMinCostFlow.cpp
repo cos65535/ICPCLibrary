@@ -20,7 +20,8 @@ typedef vector<Array> Matrix;
 void printMatrix(const Matrix &matrix) {
   for (int y = 0; y < (int)matrix.size(); y++) {
     for (int x = 0; x < (int)matrix[y].size(); x++) {
-      printf("%d ", matrix[y][x]);
+      cout << matrix[y][x] << " ";
+      // printf("%d ", matrix[y][x]);
     }
     puts("");
   }
