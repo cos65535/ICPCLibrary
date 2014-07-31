@@ -347,6 +347,10 @@ void OutputGraphviz(const Graph &g, const char *filename) {
   fprintf(fp, "digraph hoge {\n");
   string dir = UNIDIRECT ? "forward" : "none";
   REP(i, n) {
+    fprintf(fp, "  \"%d\"\n", i);
+    // fprintf(fp, "  \"%d\"[style=\"filled\", fillcolor=\"%s\"]\n", i, colorname);
+  }
+  REP(i, n) {
     REP(j, g[i].size()) {
       const Edge e = g[i][j];
       char weight[100] = "";
