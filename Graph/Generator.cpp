@@ -288,6 +288,26 @@ bool TwiceEdge(const Graph &g) {
   return false;
 }
 
+bool SelfLoop(const Graph &g) {
+  const int n = g.size();
+  REP(f, n) {
+    FORIT(it, g[f]) {
+      int t = it->dest;
+      if (f == t) { return true; }
+    }
+  }
+  return false;
+}
+
+bool IsTree(const Graph &g) {
+  const int n = g.size();
+  if (!Connected(g)) { return false; }
+  if (CountEdge(g) != n - 1) { return false; }
+  if (TwiceEdge(g)) { return false; }
+  if (SelfLoop(g)) { return false; }
+  return true;
+}
+
 Graph Rename(const Graph &g) {
   const int n = g.size();
   mapto = vector<int>(n);
