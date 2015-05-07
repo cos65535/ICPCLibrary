@@ -471,6 +471,23 @@ Graph PowerRandomTree(int n) {
   return g;
 }
 
+Graph CaterpillarTree(int n, int d) {
+  Graph g(n);
+  int s = 0;
+  int t = n - 1;
+  while (s < t) {
+    int r = rnd.next((int)(d * 0.8), (int)(d * 1.2));
+    REP(i, r) {
+      AddEdge(g, s, t--, 0);
+      if (s >= t) { break; }
+    }
+    if (s >= t) { break; }
+    AddEdge(g, s, s + 1, 0);
+    s++;
+  }
+  return g;
+}
+
 // if rnd.next(1.0) < p, vertex i is connected to candidate vertex 
 // else vertex i is connected to vertex [0, i - 1] with uniform distribution
 // p == 1 && u = 1.0 then diameter is large
